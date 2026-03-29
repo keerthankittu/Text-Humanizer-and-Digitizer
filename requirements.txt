@@ -1,0 +1,9 @@
+Flask
+Flask-Cors
+Pillow
+fpdf
+PyPDF2
+python-docx
+opencv-python
+numpy
+pytesseract
