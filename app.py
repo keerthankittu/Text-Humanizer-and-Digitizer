@@ -13,7 +13,12 @@ import pytesseract
 
 app = Flask(__name__)
 CORS(app)
-
+@app.route('/', methods=['GET'])
+def health_check():
+    return {
+        "status": "success",
+        "message": "INTELLIFY API is LIVE and Running!"
+    }, 200
 # ==========================================
 # 1. CONFIGURE TESSERACT (WINDOWS ONLY)
 # ==========================================
