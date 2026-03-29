@@ -13,7 +13,6 @@ WORKDIR /app
 
 # 4. Copy your requirements and install Python dependencies
 COPY requirements.txt .
-# Add gunicorn, which is required to run Flask in production
 RUN pip install --no-cache-dir -r requirements.txt gunicorn
 
 # 5. Copy the rest of your app code
