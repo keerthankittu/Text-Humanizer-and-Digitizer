@@ -21,7 +21,7 @@ function App() {
     if (!typedText) return alert("Please type text first!");
     setIsGenerating(true);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/generate-handwriting', 
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', 
         { text: typedText, style: selectedStyle, color: selectedColor }, { responseType: 'blob' }
       );
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
@@ -38,7 +38,7 @@ function App() {
     formData.append('color', selectedColor);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/convert-document', formData, {
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }, responseType: 'blob'
       });
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
@@ -53,7 +53,7 @@ function App() {
     formData.append('file', ocrImage);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict-handwriting', formData, {
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', formData, {
         headers: { 'Content-Type': 'multipart/form-data' } 
       });
       
@@ -69,7 +69,7 @@ function App() {
   const handleGenerateDigitizedPDF = async () => {
     setIsExtracting(true);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/generate-digital-pdf', 
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', 
         { text: extractedText }, { responseType: 'blob' }
       );
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
