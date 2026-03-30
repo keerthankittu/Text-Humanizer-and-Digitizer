@@ -19,10 +19,13 @@ def health_check():
         "status": "success",
         "message": "INTELLIFY API is LIVE and Running!"
     }, 200
+import platform
+
 # ==========================================
 # 1. CONFIGURE TESSERACT (WINDOWS ONLY)
 # ==========================================
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+if platform.system() == 'Windows':
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # ==========================================
 # 2. DIGITIZE NOTES TO JSON (AI PIPELINE)
@@ -35,7 +38,7 @@ def predict_handwriting():
     try:
         # 1. Read the uploaded image
         file = request.files['file']
-        file_bytes = np.fromfile(file, np.uint8)
+        file_bytes = np.frombuffer(file.read(), np.uint8)
         img = cv2.imdecode(file_bytes, cv2.IMREAD_GRAYSCALE)
 
         # 2. OpenCV Pipeline

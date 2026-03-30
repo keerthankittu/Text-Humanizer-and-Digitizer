@@ -21,7 +21,7 @@ function App() {
     if (!typedText) return alert("Please type text first!");
     setIsGenerating(true);
     try {
-      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', 
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com/generate-handwriting', 
         { text: typedText, style: selectedStyle, color: selectedColor }, { responseType: 'blob' }
       );
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
@@ -38,7 +38,7 @@ function App() {
     formData.append('color', selectedColor);
 
     try {
-      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', formData, {
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com/convert-document', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }, responseType: 'blob'
       });
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
@@ -53,7 +53,7 @@ function App() {
     formData.append('file', ocrImage);
 
     try {
-      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', formData, {
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com/predict-handwriting', formData, {
         headers: { 'Content-Type': 'multipart/form-data' } 
       });
       
@@ -69,7 +69,7 @@ function App() {
   const handleGenerateDigitizedPDF = async () => {
     setIsExtracting(true);
     try {
-      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com', 
+      const response = await axios.post('https://text-humanizer-and-digitizer.onrender.com/generate-digital-pdf', 
         { text: extractedText }, { responseType: 'blob' }
       );
       setPdfUrl(window.URL.createObjectURL(new Blob([response.data])));
